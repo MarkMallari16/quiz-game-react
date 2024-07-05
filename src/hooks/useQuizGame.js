@@ -129,10 +129,11 @@ const useQuizGame = () => {
 
         if (nextQuestionIndex < questions.length) {
             setCurrentQuestionIndex(nextQuestionIndex);
-            setQuestions(shuffledArray([...questions])); // Ensure questions state updates correctly
+            setQuestions(shuffledArray([...questions]));
             setIsHighlighAnswer(false);
             setSelectedOption('');
             setTimer(10);
+            setIsShowScore(false);
         } else {
             setIsShowScore(true);
             checkScore(score);
@@ -177,11 +178,11 @@ const useQuizGame = () => {
         handleTryAgain,
         shuffledArray,
         handleAnswerButtonClicked,
+        handleNextQuestion,
+        handleExit,
         isHighlighAnswer,
         selectedOption,
-        handleNextQuestion,
         feedback,
-        handleExit,
         timer
     }
 }

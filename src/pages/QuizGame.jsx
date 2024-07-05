@@ -50,11 +50,15 @@ const QuizGame = () => {
                                     : 'btn-outline'
                                     } rounded-md py-2 select-none`}
                                 onClick={() => handleAnswerButtonClicked(option)}
-                        
+
                             >
                                 {option}
                             </button>
                         ))}
+                    </div>
+
+                    <div className='text-right mt-2'>
+                        <button onClick={handleNextQuestion} className='btn btn-primary'>Next</button>
                     </div>
                 </div>
             )}
