@@ -83,7 +83,6 @@ const QuizGame = () => {
     const shuffledArray = (array) => {
         let currentIndex = array.length, randomIndex;
 
-
         while (randomIndex != 0) {
             randomIndex = Math.floor(Math.random() * currentIndex);
             console.log(randomIndex);
@@ -144,13 +143,13 @@ const QuizGame = () => {
                         <div className='font-bold'>{name}</div>
                         <div>{currentQuestionIndex + 1} / {questions.length}</div>
                     </div>
-                    <div className='bg-gray-300 rounded-lg p-5 mb-4 select-none'>
+                    <div className='bg-slate-200 rounded-lg p-5 mb-4 select-none'>
                         {questions[currentQuestionIndex].question}
                     </div>
 
                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
                         {shuffledArray(questions[currentQuestionIndex].options).map((option, index) => (
-                            <button key={index} className='px-4 ring-1 ring-slate-500 rounded-md py-2 select-none' onClick={() => handleAnswerButtonClicked(option)}>{option}</button>
+                            <button key={index} className='btn btn-outline rounded-md py-2 select-none' onClick={() => handleAnswerButtonClicked(option)}>{option}</button>
 
                         ))}
                     </div>
