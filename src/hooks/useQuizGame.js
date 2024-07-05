@@ -65,6 +65,7 @@ const useQuizGame = () => {
             answer: 'Looping through arrays'
         }
     ]
+
     const shuffledArray = (array) => {
         let currentIndex = array.length;
         let randomIndex;
@@ -86,17 +87,19 @@ const useQuizGame = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(initialCurrentQuestionIndex);
     const [score, setScore] = useState(0);
     const [isShowScore, setIsShowScore] = useState(initialIsShowScore);
-    const [scoreResultMessage, setScoreResultMessage] = useState("");
+    const [feedback, setFeedback] = useState("");
     const [timer, setTimer] = useState(10);
     const [isTimerRunning, setIsTimerRunning] = useState(true);
     const [questions, setQuestions] = useState(() => shuffledArray([...initialQuestions]));
+    const [isHighlighAnswer, setIsHighlighAnswer] = useState(false);
+    const [selectedOption, setSelectedOption] = useState("");
 
     useEffect(() => {
         localStorage.setItem("index", currentQuestionIndex);
         localStorage.setItem("showScore", isShowScore);
     }, [currentQuestionIndex, isShowScore])
 
-  
+
 
     useEffect(() => {
         let timerInterval;
@@ -112,39 +115,40 @@ const useQuizGame = () => {
 
     }, [isTimerRunning, timer])
 
-
-
-
     const handleAnswerButtonClicked = (selectedOption) => {
+        setSelectedOption(selectedOption);
         if (selectedOption === questions[currentQuestionIndex].answer) {
             setScore(score + 1)
         }
+        setIsHighlighAnswer(true);
 
-        handleNextQuestion();
+
     }
-    function handleNextQuestion() {
+    const handleNextQuestion = () => {
         const nextQuestionIndex = currentQuestionIndex + 1;
 
         if (nextQuestionIndex < questions.length) {
             setCurrentQuestionIndex(nextQuestionIndex);
-            shuffledArray(questions[nextQuestionIndex].options)
+            setQuestions(shuffledArray([...questions])); // Ensure questions state updates correctly
+            setIsHighlighAnswer(false);
+            setSelectedOption('');
             setTimer(10);
         } else {
-            setIsShowScore(true)
+            setIsShowScore(true);
             checkScore(score);
         }
-    }
+    };
     const checkScore = (finalScore) => {
         if (finalScore === 10) {
-            setScoreResultMessage("Congratulations! You have a perfect score!");
+            setFeedback("Congratulations! You have a perfect score!");
         } else if (finalScore >= 7 && score <= 9) {
-            setScoreResultMessage("Great job! You did it!");
+            setFeedback("Great job! You did it!");
         } else if (finalScore >= 4 && score <= 6) {
-            setScoreResultMessage("Good effort! You tried your best!");
+            setFeedback("Good effort! You tried your best!");
         } else if (finalScore >= 1) {
-            setScoreResultMessage("Better luck next time.");
+            setFeedback("Better luck next time.");
         } else {
-            setScoreResultMessage("Keep practicing!");
+            setFeedback("Keep practicing!");
         }
     }
     const resetState = () => {
@@ -153,6 +157,7 @@ const useQuizGame = () => {
         setIsShowScore(false);
         setScore(0);
         setTimer(10);
+        setIsHighlighAnswer(false)
         localStorage.removeItem('index');
         localStorage.removeItem('showScore');
     };
@@ -164,7 +169,21 @@ const useQuizGame = () => {
         resetState();
         originalHandleExit();
     }
-    return { questions, score, currentQuestionIndex, isShowScore, handleTryAgain, shuffledArray, handleAnswerButtonClicked, scoreResultMessage, handleExit, timer }
+    return {
+        questions,
+        score,
+        currentQuestionIndex,
+        isShowScore,
+        handleTryAgain,
+        shuffledArray,
+        handleAnswerButtonClicked,
+        isHighlighAnswer,
+        selectedOption,
+        handleNextQuestion,
+        feedback,
+        handleExit,
+        timer
+    }
 }
 
 export default useQuizGame
