@@ -7,10 +7,12 @@ const PlayComponent = () => {
 
     return (
         <div className='h-screen flex items-center justify-center'>
-            <div className='w-96'>
+            <div className='w-full max-w-2xl'>
                 <div className='flex justify-center items-center gap-4 mb-4'>
-             
-                    <h1 className=' font-bold text-2xl'>Quiz Game</h1>
+                    <div>
+                        <h1 className=' text-4xl font-black'>Quiz Game</h1>
+                        <p>Created by Mark Mallari</p>
+                    </div>
                 </div>
                 <div className='text-center'>
                     <button className='btn btn-primary w-full' onClick={handleIsPlaying}>Play</button>
