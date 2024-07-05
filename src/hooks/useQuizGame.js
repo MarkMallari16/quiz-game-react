@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import usePlay from './usePlay';
 
 const useQuizGame = () => {
@@ -78,6 +78,7 @@ const useQuizGame = () => {
         }
         return array;
     }
+
     const initialCurrentQuestionIndex = () => {
         return Number(localStorage.getItem("index")) || 0;
     }
@@ -99,8 +100,6 @@ const useQuizGame = () => {
         localStorage.setItem("showScore", isShowScore);
     }, [currentQuestionIndex, isShowScore])
 
-
-
     useEffect(() => {
         let timerInterval;
 
@@ -121,15 +120,24 @@ const useQuizGame = () => {
             setScore(score + 1)
         }
         setIsHighlighAnswer(true);
+    }
 
+    const handlePrevQuestion = () => {
+        const prevQuestionIndex = currentQuestionIndex - 1;
 
+        if (prevQuestionIndex >= 0) {
+            setCurrentQuestionIndex(prevQuestionIndex)
+            setIsHighlighAnswer(false);
+            setSelectedOption('');
+            setTimer(10);
+            setIsShowScore(false);
+        }
     }
     const handleNextQuestion = () => {
         const nextQuestionIndex = currentQuestionIndex + 1;
 
         if (nextQuestionIndex < questions.length) {
             setCurrentQuestionIndex(nextQuestionIndex);
-            setQuestions(shuffledArray([...questions]));
             setIsHighlighAnswer(false);
             setSelectedOption('');
             setTimer(10);
@@ -178,7 +186,9 @@ const useQuizGame = () => {
         handleTryAgain,
         shuffledArray,
         handleAnswerButtonClicked,
+        handlePrevQuestion,
         handleNextQuestion,
+
         handleExit,
         isHighlighAnswer,
         selectedOption,
