@@ -79,6 +79,7 @@ const useQuizGame = () => {
     const [timer, setTimer] = useState(10);
     const [isTimerRunning, setIsTimerRunning] = useState(true);
     const [questions, setQuestions] = useState(initialQuestions);
+
     useEffect(() => {
         localStorage.setItem("index", currentQuestionIndex);
         localStorage.setItem("showScore", isShowScore);

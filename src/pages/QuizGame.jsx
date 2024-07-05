@@ -20,10 +20,11 @@ const QuizGame = () => {
                 </div>
             ) : (
                 <div className='w-full p-6 lg:p-28'>
+                    <div className='text-6xl font-bold text-center mb-5'> {timer}</div>
                     <div className='flex justify-between gap-2 mb-4'>
-                       
+
                         <div className='font-bold'>Name: {name}</div>
-                        <div className='text-2xl'> {timer}</div>
+
                         <div>{currentQuestionIndex + 1} / {questions.length}</div>
                     </div>
                     <div className='bg-slate-200 rounded-lg p-5 mb-4 select-none'>
