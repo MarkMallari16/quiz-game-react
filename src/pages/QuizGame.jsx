@@ -11,6 +11,7 @@ const QuizGame = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [score, setScore] = useState(0);
     const [isShowScore, setIsShowScore] = useState(false);
+    const [scoreResultMessage, setScoreResultMessage] = useState("");
 
     const initialQuestions = [
         {
@@ -80,8 +81,8 @@ const QuizGame = () => {
     }, [])
 
     const shuffledArray = (array) => {
-        let currentIndex = array.length;
-        let randomIndex;
+        let currentIndex = array.length, randomIndex;
+
 
         while (randomIndex != 0) {
             randomIndex = Math.floor(Math.random() * currentIndex);
@@ -103,9 +104,22 @@ const QuizGame = () => {
             setCurrentQuestionIndex(nextQuestionIndex);
         } else {
             setIsShowScore(true)
+            checkScore(score);
         }
     }
-
+    const checkScore = (finalScore) => {
+        if (finalScore === 10) {
+            setScoreResultMessage("Congratulations! You have a perfect score!");
+        } else if (finalScore >= 7 && score <= 9) {
+            setScoreResultMessage("Great job! You did it!");
+        } else if (finalScore >= 4 && score <= 6) {
+            setScoreResultMessage("Good effort! You tried your best!");
+        } else if (finalScore >= 1) {
+            setScoreResultMessage("Better luck next time.");
+        } else {
+            setScoreResultMessage("Keep practicing!");
+        }
+    }
     const handleTryAgain = () => {
         setCurrentQuestionIndex(0);
         setIsShowScore(false);
@@ -116,13 +130,16 @@ const QuizGame = () => {
     return (
         <div className='h-screen flex items-center justify-center '>
             {isShowScore ? (
-                <div>
-                    <div className='text-2xl'>Congratiolations! {name} Your score is: {score}</div>
-                    <button className='btn btn-primary w-full rounded-lg mt-3' onClick={handleTryAgain}>Try Again</button>
-                    <button className='btn btn-error py-2 font-bold  w-full rounded-lg mt-3' onClick={handleExit}>Exit</button>
+                <div className='max-w-7xl'>
+                    <div>
+                        <div className='text-2xl'>{name} Your score is: {score}</div>
+                        <div className='text-center font-medium'>{scoreResultMessage}</div>
+                        <button className='btn btn-primary w-full rounded-lg mt-3' onClick={handleTryAgain}>Try Again</button>
+                        <button className='btn btn-error py-2 font-bold  w-full rounded-lg mt-3' onClick={handleExit}>Exit</button>
+                    </div>
                 </div>
             ) : (
-                <div className='w-max px-2'>
+                <div className='w-max'>
                     <div className='flex justify-between gap-2 mb-4'>
                         <div className='font-bold'>{name}</div>
                         <div>{currentQuestionIndex + 1} / {questions.length}</div>
