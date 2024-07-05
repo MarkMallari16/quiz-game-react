@@ -48,7 +48,7 @@ const QuizGame = () => {
                                         ? 'btn-success'
                                         : 'btn-error'
                                     : 'btn-outline'
-                                    } rounded-md py-2 select-none`}
+                                    } rounded-md py-2 select-none opacity-100`}
                                 onClick={() => handleAnswerButtonClicked(option)}
                                 disabled={isHighlighAnswer}
                             >
