@@ -1,9 +1,12 @@
 import React from 'react'
+import usePlay from '../hooks/usePlay'
+import PlayComponent from '../components/PlayComponent';
 
 const Home = () => {
-  return (
-    <div className='text-2xl'>Home</div>
-  )
+  
+    return (
+        <PlayComponent/>
+    )
 }
 
 export default Home
