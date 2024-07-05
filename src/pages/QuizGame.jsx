@@ -73,21 +73,22 @@ const QuizGame = () => {
             answer: 'Looping through arrays'
         }
     ]
-    const [questions,setQuestions] = useState(initialQuestions);
+
+    const [questions, setQuestions] = useState(initialQuestions);
     useEffect(() => {
         setQuestions(shuffledArray(questions))
-    },[])
+    }, [])
 
     const shuffledArray = (array) => {
         let currentIndex = array.length;
         let randomIndex;
 
-        while (randomIndex != 0){
+        while (randomIndex != 0) {
             randomIndex = Math.floor(Math.random() * currentIndex);
             console.log(randomIndex);
             currentIndex--;
 
-            [array[currentIndex],array[randomIndex]] = [array[randomIndex],array[currentIndex]];
+            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
         }
         return array;
     }
@@ -111,17 +112,17 @@ const QuizGame = () => {
         setScore(0);
         setQuestions(shuffledArray(questions))
     }
-    
+
     return (
         <div className='h-screen flex items-center justify-center '>
             {isShowScore ? (
                 <div>
                     <div className='text-2xl'>Congratiolations! {name} Your score is: {score}</div>
-                    <button className='py-2 font-bold bg-green-500 w-full rounded-lg mt-3' onClick={handleTryAgain}>Try Again</button>
-                    <button className='py-2 font-bold bg-red-500 w-full rounded-lg mt-3' onClick={handleExit}>Exit</button>
+                    <button className='btn btn-primary w-full rounded-lg mt-3' onClick={handleTryAgain}>Try Again</button>
+                    <button className='btn btn-error py-2 font-bold  w-full rounded-lg mt-3' onClick={handleExit}>Exit</button>
                 </div>
             ) : (
-                <div className='w-96'>
+                <div className='w-max px-2'>
                     <div className='flex justify-between gap-2 mb-4'>
                         <div className='font-bold'>{name}</div>
                         <div>{currentQuestionIndex + 1} / {questions.length}</div>
@@ -130,7 +131,7 @@ const QuizGame = () => {
                         {questions[currentQuestionIndex].question}
                     </div>
 
-                    <div className='flex flex-col gap-4'>
+                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
                         {shuffledArray(questions[currentQuestionIndex].options).map((option, index) => (
                             <button key={index} className='px-4 ring-1 ring-slate-500 rounded-md py-2 select-none' onClick={() => handleAnswerButtonClicked(option)}>{option}</button>
 
