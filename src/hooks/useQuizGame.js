@@ -92,9 +92,9 @@ const useQuizGame = () => {
     const [timer, setTimer] = useState(10);
     const [isTimerRunning, setIsTimerRunning] = useState(true);
     const [questions, setQuestions] = useState(() => shuffledArray([...initialQuestions]));
-    const [isHighlighAnswer, setIsHighlighAnswer] = useState(false);
+    const [isHighlightAnswer, setHighLightAnswer] = useState(false);
     const [selectedOption, setSelectedOption] = useState("");
-
+    
     useEffect(() => {
         localStorage.setItem("index", currentQuestionIndex);
         localStorage.setItem("showScore", isShowScore);
@@ -119,7 +119,7 @@ const useQuizGame = () => {
         if (selectedOption === questions[currentQuestionIndex].answer) {
             setScore(score + 1)
         }
-        setIsHighlighAnswer(true);
+        setHighLightAnswer(true);
     }
 
     const handlePrevQuestion = () => {
@@ -127,7 +127,7 @@ const useQuizGame = () => {
 
         if (prevQuestionIndex >= 0) {
             setCurrentQuestionIndex(prevQuestionIndex)
-            setIsHighlighAnswer(false);
+            setHighLightAnswer(true);
             setSelectedOption('');
             setTimer(10);
             setIsShowScore(false);
@@ -138,7 +138,7 @@ const useQuizGame = () => {
 
         if (nextQuestionIndex < questions.length) {
             setCurrentQuestionIndex(nextQuestionIndex);
-            setIsHighlighAnswer(false);
+            setHighLightAnswer(false);
             setSelectedOption('');
             setTimer(10);
             setIsShowScore(false);
@@ -166,7 +166,7 @@ const useQuizGame = () => {
         setIsShowScore(false);
         setScore(0);
         setTimer(10);
-        setIsHighlighAnswer(false)
+        setHighLightAnswer(false)
         localStorage.removeItem('index');
         localStorage.removeItem('showScore');
     };
@@ -190,7 +190,7 @@ const useQuizGame = () => {
         handleNextQuestion,
 
         handleExit,
-        isHighlighAnswer,
+        isHighlightAnswer,
         selectedOption,
         feedback,
         timer

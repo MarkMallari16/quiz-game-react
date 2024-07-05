@@ -7,7 +7,7 @@ const QuizGame = () => {
 
     const location = useLocation();
     const { name } = location.state || {};
-    const { questions, score, currentQuestionIndex, isShowScore, handleTryAgain, handleAnswerButtonClicked, isHighlighAnswer, handlePrevQuestion, handleNextQuestion, feedback, handleExit, timer } = useQuizGame();
+    const { questions, score, currentQuestionIndex, isShowScore, handleTryAgain, handleAnswerButtonClicked, isHighlightAnswer, handlePrevQuestion, handleNextQuestion, feedback, handleExit, timer } = useQuizGame();
 
 
     return (
@@ -43,14 +43,14 @@ const QuizGame = () => {
                         {questions[currentQuestionIndex].options.map((option, index) => (
                             <button
                                 key={index}
-                                className={`btn ${isHighlighAnswer
+                                className={`btn ${isHighlightAnswer
                                     ? option === questions[currentQuestionIndex].answer
                                         ? 'btn-success'
                                         : 'btn-error'
                                     : 'btn-outline'
                                     } rounded-md py-2 select-none opacity-100`}
                                 onClick={() => handleAnswerButtonClicked(option)}
-                                disabled={isHighlighAnswer}
+                                disabled={isHighlightAnswer}
                             >
                                 {option}
                             </button>
