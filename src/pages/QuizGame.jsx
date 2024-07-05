@@ -12,7 +12,7 @@ const QuizGame = () => {
             <div className='w-96'>
                 <div className='flex justify-between gap-2 mb-4'>
                     <div className='font-bold'>{name}</div>
-                    <div>1 / out of 5 questions</div>
+                    <div>Your score: 1 / out of 5 questions</div>
                 </div>
                 <div className='bg-gray-300 rounded-lg p-5 mb-4'>
                     Sino Pumatay kay Lapu Lapu?
