@@ -10,16 +10,16 @@ const QuizGame = () => {
     const { questions, score, currentQuestionIndex, isShowScore, handleTryAgain, handleAnswerButtonClicked, shuffledArray, scoreResultMessage, handleExit, timer } = useQuizGame();
 
     return (
-        <div className='h-screen flex items-center justify-center '>
+        <div className='h-screen flex items-center justify-center bg-blue-500'>
             {isShowScore ? (
-                <div>
+                <div className='bg-white'>
                     <div className='text-2xl font-black'>{name} Your score is: {score}</div>
                     <div className='text-center font-medium'>{scoreResultMessage}</div>
                     <button className='btn btn-primary w-full rounded-lg mt-3' onClick={handleTryAgain}>Try Again</button>
                     <button className='btn btn-error py-2 font-bold  w-full rounded-lg mt-3' onClick={handleExit}>Exit</button>
                 </div>
             ) : (
-                <div className='w-full p-6 lg:p-28'>
+                <div className='p-10 lg:p-24 bg-white rounded-xl'>
                     <div className='text-6xl font-bold text-center mb-5'> {timer}</div>
                     <div className='flex justify-between gap-2 mb-4'>
 
