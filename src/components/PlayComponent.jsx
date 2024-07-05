@@ -12,7 +12,7 @@ const PlayComponent = () => {
                 <div className='w-full max-w-2xl'>
                     <div className='flex justify-center items-center gap-4 mb-4'>
                         <div>
-                            <h1 className=' text-7xl lg:text-6xl font-black'>Quiz Game</h1>
+                            <h1 className=' text-6xl lg:text-6xl font-black text-center'>Quiz Game</h1>
                             <p className='text-center'>Created by Mark Mallari</p>
                         </div>
                     </div>

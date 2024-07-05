@@ -65,7 +65,18 @@ const useQuizGame = () => {
             answer: 'Looping through arrays'
         }
     ]
+    const shuffledArray = (array) => {
+        let currentIndex = array.length;
+        let randomIndex;
 
+        while (currentIndex != 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+
+            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
     const initialCurrentQuestionIndex = () => {
         return Number(localStorage.getItem("index")) || 0;
     }
@@ -78,16 +89,14 @@ const useQuizGame = () => {
     const [scoreResultMessage, setScoreResultMessage] = useState("");
     const [timer, setTimer] = useState(10);
     const [isTimerRunning, setIsTimerRunning] = useState(true);
-    const [questions, setQuestions] = useState(initialQuestions);
+    const [questions, setQuestions] = useState(() => shuffledArray([...initialQuestions]));
 
     useEffect(() => {
         localStorage.setItem("index", currentQuestionIndex);
         localStorage.setItem("showScore", isShowScore);
     }, [currentQuestionIndex, isShowScore])
 
-    useEffect(() => {
-        setQuestions(shuffledArray(questions))
-    }, []);
+  
 
     useEffect(() => {
         let timerInterval;
@@ -105,18 +114,7 @@ const useQuizGame = () => {
 
 
 
-    const shuffledArray = (array) => {
-        let currentIndex = array.length;
-        let randomIndex;
 
-        while (currentIndex != 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
-
-            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-        }
-        return array;
-    }
     const handleAnswerButtonClicked = (selectedOption) => {
         if (selectedOption === questions[currentQuestionIndex].answer) {
             setScore(score + 1)
@@ -150,21 +148,21 @@ const useQuizGame = () => {
         }
     }
     const resetState = () => {
+        setQuestions(shuffledArray([...initialQuestions]));
         setCurrentQuestionIndex(0);
         setIsShowScore(false);
         setScore(0);
-        shuffledArray([...initialQuestions])
-      
-        localStorage.removeItem("index");
-        localStorage.removeItem("showScore");
-        setTimer(10)
-    }
+        setTimer(10);
+        localStorage.removeItem('index');
+        localStorage.removeItem('showScore');
+    };
+
     const handleTryAgain = () => {
         resetState();
     }
     const handleExit = () => {
-        resetState()
-        originalHandleExit()
+        resetState();
+        originalHandleExit();
     }
     return { questions, score, currentQuestionIndex, isShowScore, handleTryAgain, shuffledArray, handleAnswerButtonClicked, scoreResultMessage, handleExit, timer }
 }

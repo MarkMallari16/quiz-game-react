@@ -10,18 +10,23 @@ const QuizGame = () => {
     const { questions, score, currentQuestionIndex, isShowScore, handleTryAgain, handleAnswerButtonClicked, scoreResultMessage, handleExit, timer } = useQuizGame();
 
     return (
-        <div className='h-screen flex items-center justify-center bg-blue-500'>
+        <div className='h-screen flex items-center justify-center bg-blue-500 shadow-lg'>
             {isShowScore ? (
                 <div className='bg-white p-10 lg:p-24 rounded-lg'>
-                    <div className='text-2xl font-black'>{name} Your score is: {score}</div>
+                    <div className='text-2xl font-black uppercase'>
+                        {name}, your score is:
+                    </div>
+                    <div className='font-black text-center text-6xl  my-6'>
+                        {score} / {questions.length}
+                    </div>
                     <div className='text-center font-medium'>{scoreResultMessage}</div>
                     <div className='mt-4'>
-                        <button className='btn btn-primary w-full rounded-lg mt-3' onClick={handleTryAgain}>Try Again</button>
+                        <button className='btn btn-primary w-full rounded-lg mt-3 font-bold' onClick={handleTryAgain}>Take new quiz</button>
                         <button className='btn btn-error py-2 font-bold  w-full rounded-lg mt-3' onClick={handleExit}>Exit</button>
                     </div>
                 </div>
             ) : (
-                <div className='p-10 lg:p-24 bg-white rounded-xl'>
+                <div className='p-10 lg:p-24 bg-white rounded-xl shadow-lg'>
                     <div className='text-6xl font-bold text-center mb-5'> {timer}</div>
                     <div className='flex justify-between gap-2 mb-4'>
 
