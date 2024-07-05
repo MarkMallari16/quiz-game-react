@@ -7,10 +7,10 @@ const usePlay = () => {
     const handleIsPlaying = () => {
         navigate('/info')
     }
-    const handleIsStopPlaying = () => {
+    const handleExit = () => {
         navigate('/')
     }
-    return { handleIsPlaying, handleIsStopPlaying };
+    return { handleIsPlaying, handleExit };
 }
 
 export default usePlay

@@ -11,9 +11,7 @@ import QuizGame from './pages/QuizGame.jsx'
 import Info from './pages/Info.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-
     <Router>
-
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/info' element={<Info/>}/>
