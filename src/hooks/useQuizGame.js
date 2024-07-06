@@ -125,8 +125,6 @@ const useQuizGame = () => {
 
     }, [isTimerRunning, timer])
 
-
-
     const handleNextQuestion = () => {
         const nextQuestionIndex = currentQuestionIndex + 1;
 
@@ -135,24 +133,31 @@ const useQuizGame = () => {
             setSelectedOption('');
             setTimer(10);
             setIsShowScore(false);
-
-          
         } else {
             setIsShowScore(true);
             setIsTimerRunning(false);
-            checkScore(score + 1);
+            setScore(score => {
+                const newScore = score;
+                checkScore(newScore);
+
+                return newScore;
+            })
         }
+
     };
+    const handleAnswerButtonClicked = (selectedOption) => {
+        setSelectedOption(selectedOption);
+        if (selectedOption === questions[currentQuestionIndex].answer) {
+            setScore(score + 1);
+        }
+        handleNextQuestion();
+    }
 
     const checkScore = (finalScore) => {
-        console.log(finalScore)
+
         if (finalScore === 10) {
             setFeedback("Congratulations! You have a perfect score!");
             setShowConfetti(true);
-            setTimeout(() => {
-                setShowConfetti(false);
-            }, 10000);
-            
         } else if (finalScore >= 7 && finalScore <= 9) {
             setFeedback("Great job! You did it!");
         } else if (finalScore >= 4 && finalScore <= 6) {
@@ -164,14 +169,8 @@ const useQuizGame = () => {
         }
     }
 
-    const handleAnswerButtonClicked = (selectedOption) => {
-        setSelectedOption(selectedOption);
-        if (selectedOption === questions[currentQuestionIndex].answer) {
-            setScore((prevScore) => prevScore + 1);
-          
-        }
-        handleNextQuestion();
-    }
+
+
     const resetState = () => {
         setQuestions(shuffledArray([...initialQuestions]));
         setCurrentQuestionIndex(0);
@@ -179,11 +178,11 @@ const useQuizGame = () => {
         setScore(0);
         setTimer(10);
         setIsTimerRunning(true);
-        setShowConfetti(false)
-        console.log(showConfetti)
+        setShowConfetti(false);
         localStorage.removeItem('index');
         localStorage.removeItem("score");
         localStorage.removeItem('showScore');
+        localStorage.removeItem("feedback");
     };
 
     const handleTryAgain = () => {
