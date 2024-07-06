@@ -70,9 +70,9 @@ const useQuizGame = () => {
         //[1,2,3,4,5]
         for (let index = array.length - 1; index > 0; index--) {
             const indexSecond = Math.floor(Math.random() * (index + 1));
-            
+
             [array[index], array[indexSecond]] = [array[indexSecond], array[index]];
-            
+
         }
         return array;
     }
@@ -117,7 +117,7 @@ const useQuizGame = () => {
         if (selectedOption === questions[currentQuestionIndex].answer) {
             setScore(score + 1)
         }
-        
+
         handleNextQuestion();
     }
 
@@ -132,6 +132,7 @@ const useQuizGame = () => {
         } else {
             setIsShowScore(true);
             checkScore(score);
+            setIsTimerRunning(false)
         }
     };
     const checkScore = (finalScore) => {
@@ -153,7 +154,8 @@ const useQuizGame = () => {
         setIsShowScore(false);
         setScore(0);
         setTimer(10);
-       
+        setIsTimerRunning(true);
+        
         localStorage.removeItem('index');
         localStorage.removeItem('showScore');
     };
