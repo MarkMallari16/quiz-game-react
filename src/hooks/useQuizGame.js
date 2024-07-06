@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import usePlay from './usePlay';
+import useConfetti from './useConfetti';
 
 const useQuizGame = () => {
     const { handleExit: originalHandleExit } = usePlay();
@@ -67,7 +68,7 @@ const useQuizGame = () => {
     ]
 
     const shuffledArray = (array) => {
-        //[1,2,3,4,5]
+
         for (let index = array.length - 1; index > 0; index--) {
             const indexSecond = Math.floor(Math.random() * (index + 1));
 
@@ -80,23 +81,35 @@ const useQuizGame = () => {
     const initialCurrentQuestionIndex = () => {
         return Number(localStorage.getItem("index")) || 0;
     }
+    const initialCurrentScore = () => {
+        return Number(localStorage.getItem("score")) || 0
+    }
     const initialIsShowScore = () => {
         return localStorage.getItem("showScore") === "true"
     }
+    const initialFeedBack = () => {
+        const storedFeedback = localStorage.getItem("feedback");
+        return JSON.parse(storedFeedback) || ""
+    }
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(initialCurrentQuestionIndex);
-    const [score, setScore] = useState(0);
+    const [score, setScore] = useState(initialCurrentScore);
     const [isShowScore, setIsShowScore] = useState(initialIsShowScore);
-    const [feedback, setFeedback] = useState("");
+    const [feedback, setFeedback] = useState(initialFeedBack);
     const [timer, setTimer] = useState(10);
     const [isTimerRunning, setIsTimerRunning] = useState(true);
     const [questions, setQuestions] = useState(() => shuffledArray([...initialQuestions]));
     const [selectedOption, setSelectedOption] = useState("");
 
+    const { showConfetti, setShowConfetti } = useConfetti();
+
     useEffect(() => {
         localStorage.setItem("index", currentQuestionIndex);
+        localStorage.setItem("score", score);
         localStorage.setItem("showScore", isShowScore);
-    }, [currentQuestionIndex, isShowScore])
+        localStorage.setItem("feedback", JSON.stringify(feedback));
+
+    }, [currentQuestionIndex, score, isShowScore])
 
     useEffect(() => {
         let timerInterval;
@@ -112,14 +125,7 @@ const useQuizGame = () => {
 
     }, [isTimerRunning, timer])
 
-    const handleAnswerButtonClicked = (selectedOption) => {
-        setSelectedOption(selectedOption);
-        if (selectedOption === questions[currentQuestionIndex].answer) {
-            setScore(score + 1)
-        }
 
-        handleNextQuestion();
-    }
 
     const handleNextQuestion = () => {
         const nextQuestionIndex = currentQuestionIndex + 1;
@@ -129,24 +135,42 @@ const useQuizGame = () => {
             setSelectedOption('');
             setTimer(10);
             setIsShowScore(false);
+
+          
         } else {
             setIsShowScore(true);
-            checkScore(score);
-            setIsTimerRunning(false)
+            setIsTimerRunning(false);
+            checkScore(score + 1);
         }
     };
+
     const checkScore = (finalScore) => {
+        console.log(finalScore)
         if (finalScore === 10) {
             setFeedback("Congratulations! You have a perfect score!");
-        } else if (finalScore >= 7 && score <= 9) {
+            setShowConfetti(true);
+            setTimeout(() => {
+                setShowConfetti(false);
+            }, 10000);
+            
+        } else if (finalScore >= 7 && finalScore <= 9) {
             setFeedback("Great job! You did it!");
-        } else if (finalScore >= 4 && score <= 6) {
+        } else if (finalScore >= 4 && finalScore <= 6) {
             setFeedback("Good effort! You tried your best!");
-        } else if (finalScore >= 1) {
+        } else if (finalScore >= 1 && finalScore <= 3) {
             setFeedback("Better luck next time.");
         } else {
             setFeedback("Keep practicing!");
         }
+    }
+
+    const handleAnswerButtonClicked = (selectedOption) => {
+        setSelectedOption(selectedOption);
+        if (selectedOption === questions[currentQuestionIndex].answer) {
+            setScore((prevScore) => prevScore + 1);
+          
+        }
+        handleNextQuestion();
     }
     const resetState = () => {
         setQuestions(shuffledArray([...initialQuestions]));
@@ -155,8 +179,10 @@ const useQuizGame = () => {
         setScore(0);
         setTimer(10);
         setIsTimerRunning(true);
-        
+        setShowConfetti(false)
+        console.log(showConfetti)
         localStorage.removeItem('index');
+        localStorage.removeItem("score");
         localStorage.removeItem('showScore');
     };
 
@@ -179,7 +205,8 @@ const useQuizGame = () => {
         handleExit,
         selectedOption,
         feedback,
-        timer
+        timer,
+        showConfetti
     }
 }
 

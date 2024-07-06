@@ -1,14 +1,26 @@
 import React from 'react'
 
 import { useLocation } from 'react-router-dom'
+import Confetti from 'react-confetti';
 import useQuizGame from '../hooks/useQuizGame';
+import useConfetti from '../hooks/useConfetti';
 
 const QuizGame = () => {
 
     const location = useLocation();
     const { name } = location.state || {};
-    const { questions, score, currentQuestionIndex, isShowScore, handleTryAgain, handleAnswerButtonClicked, feedback, handleExit, timer } = useQuizGame();
-
+    const { questions,
+        score,
+        currentQuestionIndex,
+        isShowScore,
+        shuffledArray,
+        handleTryAgain,
+        handleAnswerButtonClicked,
+        feedback,
+        handleExit,
+        showConfetti,
+        timer } = useQuizGame();
+    const { dimensions } = useConfetti();
 
     return (
         <div className='h-screen flex items-center justify-center bg-blue-500 shadow-lg'>
@@ -27,7 +39,7 @@ const QuizGame = () => {
                     </div>
                 </div>
             ) : (
-                <div className='p-10 lg:p-24 bg-white rounded-xl shadow-lg'>
+                <div className='p-20 bg-white rounded-xl shadow-lg'>
                     <div className='text-6xl font-bold text-center mb-5'> {timer}</div>
                     <div className='flex justify-between gap-2 mb-4'>
 
@@ -45,13 +57,24 @@ const QuizGame = () => {
                                 key={index}
                                 className={`btn btn-outline select-none`}
                                 onClick={() => handleAnswerButtonClicked(option)}
-                                
+
                             >
                                 {option}
                             </button>
                         ))}
                     </div>
 
+                </div>
+            )}
+
+            {showConfetti && (
+                <div className='overflow-x-hidden'>
+                    <Confetti
+                        width={dimensions.width}
+                        height={dimensions.height}
+                        gravity={0.10}
+                        numberOfPieces={500}
+                    />
                 </div>
             )}
         </div>
