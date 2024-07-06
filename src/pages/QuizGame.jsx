@@ -7,7 +7,7 @@ const QuizGame = () => {
 
     const location = useLocation();
     const { name } = location.state || {};
-    const { questions, score, currentQuestionIndex, isShowScore, handleTryAgain, handleAnswerButtonClicked, isHighlightAnswer, handlePrevQuestion, handleNextQuestion, feedback, handleExit, timer } = useQuizGame();
+    const { questions, score, currentQuestionIndex, isShowScore, handleTryAgain, handleAnswerButtonClicked, feedback, handleExit, timer } = useQuizGame();
 
 
     return (
@@ -43,25 +43,15 @@ const QuizGame = () => {
                         {questions[currentQuestionIndex].options.map((option, index) => (
                             <button
                                 key={index}
-                                className={`btn ${isHighlightAnswer
-                                    ? option === questions[currentQuestionIndex].answer
-                                        ? 'btn-success'
-                                        : 'btn-error'
-                                    : 'btn-outline'
-                                    } rounded-md py-2 select-none opacity-100`}
+                                className={`btn btn-outline select-none`}
                                 onClick={() => handleAnswerButtonClicked(option)}
-                                disabled={isHighlightAnswer}
+                                
                             >
                                 {option}
                             </button>
                         ))}
                     </div>
 
-                    <div className='flex justify-between items-center mt-5'>
-                        <button onClick={handlePrevQuestion} className='btn btn-primary'>Prev</button>
-                        <div>Github</div>
-                        <button onClick={handleNextQuestion} className='btn btn-primary'>Next</button>
-                    </div>
                 </div>
             )}
         </div>

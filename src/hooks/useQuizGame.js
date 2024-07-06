@@ -67,14 +67,12 @@ const useQuizGame = () => {
     ]
 
     const shuffledArray = (array) => {
-        let currentIndex = array.length;
-        let randomIndex;
-
-        while (currentIndex != 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
-
-            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        //[1,2,3,4,5]
+        for (let index = array.length - 1; index > 0; index--) {
+            const indexSecond = Math.floor(Math.random() * (index + 1));
+            
+            [array[index], array[indexSecond]] = [array[indexSecond], array[index]];
+            
         }
         return array;
     }
@@ -85,6 +83,7 @@ const useQuizGame = () => {
     const initialIsShowScore = () => {
         return localStorage.getItem("showScore") === "true"
     }
+
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(initialCurrentQuestionIndex);
     const [score, setScore] = useState(0);
     const [isShowScore, setIsShowScore] = useState(initialIsShowScore);
@@ -92,9 +91,8 @@ const useQuizGame = () => {
     const [timer, setTimer] = useState(10);
     const [isTimerRunning, setIsTimerRunning] = useState(true);
     const [questions, setQuestions] = useState(() => shuffledArray([...initialQuestions]));
-    const [isHighlightAnswer, setHighLightAnswer] = useState(false);
     const [selectedOption, setSelectedOption] = useState("");
-    
+
     useEffect(() => {
         localStorage.setItem("index", currentQuestionIndex);
         localStorage.setItem("showScore", isShowScore);
@@ -119,26 +117,15 @@ const useQuizGame = () => {
         if (selectedOption === questions[currentQuestionIndex].answer) {
             setScore(score + 1)
         }
-        setHighLightAnswer(true);
+        
+        handleNextQuestion();
     }
 
-    const handlePrevQuestion = () => {
-        const prevQuestionIndex = currentQuestionIndex - 1;
-
-        if (prevQuestionIndex >= 0) {
-            setCurrentQuestionIndex(prevQuestionIndex)
-            setHighLightAnswer(true);
-            setSelectedOption('');
-            setTimer(10);
-            setIsShowScore(false);
-        }
-    }
     const handleNextQuestion = () => {
         const nextQuestionIndex = currentQuestionIndex + 1;
 
         if (nextQuestionIndex < questions.length) {
             setCurrentQuestionIndex(nextQuestionIndex);
-            setHighLightAnswer(false);
             setSelectedOption('');
             setTimer(10);
             setIsShowScore(false);
@@ -166,7 +153,7 @@ const useQuizGame = () => {
         setIsShowScore(false);
         setScore(0);
         setTimer(10);
-        setHighLightAnswer(false)
+       
         localStorage.removeItem('index');
         localStorage.removeItem('showScore');
     };
@@ -186,11 +173,8 @@ const useQuizGame = () => {
         handleTryAgain,
         shuffledArray,
         handleAnswerButtonClicked,
-        handlePrevQuestion,
         handleNextQuestion,
-
         handleExit,
-        isHighlightAnswer,
         selectedOption,
         feedback,
         timer
