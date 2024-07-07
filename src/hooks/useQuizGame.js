@@ -287,7 +287,7 @@ const useQuizGame = () => {
 
     const checkScore = (finalScore) => {
 
-        if (finalScore === 10) {
+        if (finalScore === initialQuestions[selectedCategory].length) {
             setFeedback("Congratulations! You have a perfect score!");
             setShowConfetti(true);
         } else if (finalScore >= 7 && finalScore <= 9) {
