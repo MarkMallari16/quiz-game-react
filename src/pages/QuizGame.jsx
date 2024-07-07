@@ -13,13 +13,13 @@ const QuizGame = () => {
         score,
         currentQuestionIndex,
         isShowScore,
-        shuffledArray,
         handleTryAgain,
         handleAnswerButtonClicked,
         feedback,
         handleExit,
         showConfetti,
         timer } = useQuizGame();
+        
     const { dimensions } = useConfetti();
 
     return (
