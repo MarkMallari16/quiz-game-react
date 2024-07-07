@@ -4,7 +4,7 @@ import useCategory from '../hooks/useCategory';
 
 const Category = () => {
 
-    const {selectedCategory, categories, handleCategorySelect } = useCategory();
+    const { categories, handleCategorySelect } = useCategory();
 
     return (
         <ResponsiveLayout>

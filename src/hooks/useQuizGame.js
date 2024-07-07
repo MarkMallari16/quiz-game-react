@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import usePlay from './usePlay';
 import useConfetti from './useConfetti';
-import Category from '../pages/Category';
-import useCategory from './useCategory';
+import { useLocation } from 'react-router-dom';
 
 const useQuizGame = () => {
     const { handleExit: originalHandleExit } = usePlay();
-    const { selectedCategory } = useCategory();
+    const { search } = useLocation();
+    const params = new URLSearchParams(search);
+    const selectedCategory = params.get('category');
 
     const initialQuestions = {
         Programming: [
@@ -197,7 +198,7 @@ const useQuizGame = () => {
         ]
     }
     const initialQuestionsFiltered = initialQuestions[selectedCategory] || [];
-    
+
     const shuffledArray = (array) => {
 
         for (let index = array.length - 1; index > 0; index--) {
