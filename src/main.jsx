@@ -7,15 +7,17 @@ import Home from './pages/Home.jsx'
 import NotFound from './pages/NotFound.jsx'
 import QuizGame from './pages/QuizGame.jsx'
 import Info from './pages/Info.jsx'
+import Category from './pages/Category.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/info' element={<Info/>}/>
-        <Route path='/game' element={<QuizGame/>}/>
-        <Route path='*' element={<NotFound/>}/>
-      </Routes> 
+        <Route path='/' element={<Home />} />
+        <Route path='/category' element={<Category />} />
+        <Route path='/info' element={<Info />} />
+        <Route path='/game' element={<QuizGame />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
     </Router>
   </React.StrictMode>,
 )

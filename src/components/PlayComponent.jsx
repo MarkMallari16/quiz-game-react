@@ -9,15 +9,15 @@ const PlayComponent = () => {
 
     return (
         <ResponsiveLayout>
-            <div className='bg-white  py-14  px-20 rounded-lg'>
+            <div className='bg-white  py-14 px-16 lg:px-20 rounded-lg'>
                 <div className='w-full max-w-2xl'>
                     <div className='flex justify-center items-center gap-4 mb-4'>
                         <div>
                             <div className='flex items-center gap-5'>
-                                <h1 className=' text-6xl lg:text-6xl font-black text-center'>
+                                <h1 className=' text-5xl lg:text-7xl font-black text-center'>
                                     Quiz Game
                                 </h1>
-                                <img src={BulbImage} className='w-24' />
+                                <img src={BulbImage} className='w-24 select-none hidden lg:block' />
                             </div>
 
                         </div>
@@ -30,7 +30,7 @@ const PlayComponent = () => {
                             <FaGithub className='text-2xl' />
                         </a>
                     </div>
-                    <p className='text-center font-normal mt-1'>Copyright &copy; Mark Mallari</p>
+                    <p className='text-center font-normal mt-1'>Copyright &copy; Mark Mallari 2024</p>
                 </div>
             </div>
         </ResponsiveLayout>

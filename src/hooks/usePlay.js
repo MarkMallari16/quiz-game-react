@@ -10,6 +10,7 @@ const usePlay = () => {
     const handleExit = () => {
         navigate('/')
     }
+
     return { handleIsPlaying, handleExit };
 }
 

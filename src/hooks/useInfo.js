@@ -16,7 +16,7 @@ const useInfo = () => {
             setError("Name is required!")
         } else {
             setError('')
-            navigate('/game', { state: { name: nameValue } })
+            navigate('/category', { state: { name: nameValue } })
         }
     }
     return { nameValue, error, handleNameValue, handleStartGame };
