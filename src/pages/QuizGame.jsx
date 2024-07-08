@@ -2,9 +2,7 @@ import React from 'react'
 import Confetti from 'react-confetti';
 import useQuizGame from '../hooks/useQuizGame';
 import useConfetti from '../hooks/useConfetti';
-import useInfo from '../hooks/useInfo';
-import { useLocation } from 'react-router-dom';
-import useCategory from '../hooks/useCategory';
+
 
 const QuizGame = () => {
     const {
@@ -71,7 +69,7 @@ const QuizGame = () => {
                     <Confetti
                         width={dimensions.width}
                         height={dimensions.height}
-                        gravity={0.5}
+                        gravity={0.8}
                         numberOfPieces={500}
                     />
                 </div>
