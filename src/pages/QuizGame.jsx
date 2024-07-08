@@ -4,6 +4,7 @@ import useQuizGame from '../hooks/useQuizGame';
 import useConfetti from '../hooks/useConfetti';
 import useInfo from '../hooks/useInfo';
 import { useLocation } from 'react-router-dom';
+import useCategory from '../hooks/useCategory';
 
 const QuizGame = () => {
     const {
@@ -24,7 +25,7 @@ const QuizGame = () => {
     return (
         <div className='h-screen flex items-center justify-center bg-blue-500 shadow-lg'>
             {isShowScore ? (
-                <div className='bg-white p-10 lg:p-24 rounded-lg'>
+                <div className='bg-white p-10 lg:p-20 rounded-lg'>
                     <div className='text-2xl font-black uppercase'>
                         {name}, your score is:
                     </div>
@@ -38,7 +39,7 @@ const QuizGame = () => {
                     </div>
                 </div>
             ) : (
-                <div className='p-20 bg-white rounded-xl shadow-lg'>
+                <div className='p-10 lg:p-20 bg-white rounded-xl shadow-lg'>
                     <div className='text-6xl font-bold text-center mb-5'> {timer}</div>
                     <div className='flex justify-between gap-2 mb-4'>
 
@@ -50,13 +51,12 @@ const QuizGame = () => {
                         {questions[currentQuestionIndex] && questions[currentQuestionIndex].question}
                     </div>
 
-                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-2'>
                         {questions[currentQuestionIndex] && questions[currentQuestionIndex].options.map((option, index) => (
                             <button
                                 key={index}
-                                className={`btn btn-outline select-none`}
+                                className={`btn btn-outline select-none w-96`}
                                 onClick={() => handleAnswerButtonClicked(option)}
-
                             >
                                 {option}
                             </button>

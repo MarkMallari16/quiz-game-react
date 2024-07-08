@@ -12,6 +12,7 @@ const useQuizGame = () => {
     const { name } = location.state || {};
 
     const initialQuestions = {
+        //Programming Questions
         Programming: [
             {
                 id: 1,
@@ -83,122 +84,208 @@ const useQuizGame = () => {
                 answer: 'Looping through arrays'
             },
         ],
+        //Math Questions
         Math: [
-            //Math Questions
             {
                 id: 11,
-
                 question: 'What is the value of Pi (π) to two decimal places?',
                 options: ['3.14', '2.17', '1.62', '4.13'],
                 answer: '3.14'
             },
             {
                 id: 12,
-
                 question: 'What is the square root of 144?',
                 options: ['12', '14', '16', '18'],
                 answer: '12'
             },
             {
                 id: 13,
-
                 question: 'What is 15% of 200?',
                 options: ['30', '25', '35', '40'],
                 answer: '30'
             },
             {
                 id: 14,
-
                 question: 'What is the value of the expression 2 + 3 * 4?',
                 options: ['14', '20', '18', '12'],
                 answer: '14'
             },
             {
                 id: 15,
-
                 question: 'What is 1 + 1?',
                 options: ['2', '11', 'Magellan'],
                 answer: 'πr^2'
             },
+            {
+                id: 16,
+                question: 'What is the sum of the angles in a triangle?',
+                options: ['180 degrees', '90 degrees', '360 degrees', '270 degrees'],
+                answer: '180 degrees'
+            },
+            {
+                id: 17,
+                question: 'What is the next prime number after 7?',
+                options: ['11', '9', '10', '8'],
+                answer: '11'
+            },
+            {
+                id: 18,
+                question: 'What is the product of 7 and 8?',
+                options: ['54', '56', '58', '60'],
+                answer: '56'
+            },
+            {
+                id: 19,
+                question: 'What is 50% of 80?',
+                options: ['30', '35', '40', '45'],
+                answer: '40'
+            },
+            {
+                id: 20,
+                question: 'What is the value of the expression 5^2?',
+                options: ['25', '20', '15', '10'],
+                answer: '25'
+            }
         ],
         // Science Questions
 
         Science: [
             {
-                id: 16,
-
+                id: 21,
                 question: 'What is the chemical symbol for water?',
                 options: ['H2O', 'HO2', 'O2H', 'OH2'],
                 answer: 'H2O'
             },
             {
-                id: 17,
-
+                id: 22,
                 question: 'What planet is known as the Red Planet?',
                 options: ['Mars', 'Jupiter', 'Venus', 'Saturn'],
                 answer: 'Mars'
             },
             {
-                id: 18,
-
+                id: 23,
                 question: 'What is the powerhouse of the cell?',
                 options: ['Nucleus', 'Ribosome', 'Mitochondria', 'Golgi Apparatus'],
                 answer: 'Mitochondria'
             },
             {
-                id: 19,
-
+                id: 24,
                 question: 'What gas do plants absorb from the atmosphere?',
                 options: ['Oxygen', 'Nitrogen', 'Carbon Dioxide', 'Hydrogen'],
                 answer: 'Carbon Dioxide'
             },
             {
-                id: 20,
-
+                id: 25,
                 question: 'What force keeps us on the ground?',
                 options: ['Magnetism', 'Gravity', 'Inertia', 'Friction'],
                 answer: 'Gravity'
+            },
+            {
+                id: 26,
+                question: 'What is the speed of light?',
+                options: ['300,000 km/s', '150,000 km/s', '450,000 km/s', '600,000 km/s'],
+                answer: '300,000 km/s'
+            },
+            {
+                id: 27,
+                question: 'What is the main gas found in the air we breathe?',
+                options: ['Oxygen', 'Hydrogen', 'Nitrogen', 'Carbon Dioxide'],
+                answer: 'Nitrogen'
+            },
+            {
+                id: 28,
+                question: 'What part of the plant conducts photosynthesis?',
+                options: ['Root', 'Stem', 'Leaf', 'Flower'],
+                answer: 'Leaf'
+            },
+            {
+                id: 29,
+                question: 'What planet is closest to the Sun?',
+                options: ['Earth', 'Venus', 'Mercury', 'Mars'],
+                answer: 'Mercury'
+            },
+            {
+                id: 30,
+                question: 'What is the chemical symbol for gold?',
+                options: ['Au', 'Ag', 'Fe', 'Gd'],
+                answer: 'Au'
             }
         ],
         English: [
             // English Questions
             {
-                id: 21,
+                id: 31,
                 category: 'English',
                 question: 'Which word is a synonym for "happy"?',
                 options: ['Sad', 'Joyful', 'Angry', 'Tired'],
                 answer: 'Joyful'
             },
             {
-                id: 22,
+                id: 32,
                 category: 'English',
                 question: 'What is the past tense of "run"?',
                 options: ['Run', 'Ran', 'Running', 'Runs'],
                 answer: 'Ran'
             },
             {
-                id: 23,
+                id: 33,
                 category: 'English',
                 question: 'Which sentence is correct?',
                 options: ['He go to school.', 'She goes to school.', 'They goes to school.', 'We goes to school.'],
                 answer: 'She goes to school.'
             },
             {
-                id: 24,
+                id: 34,
                 category: 'English',
                 question: 'What is the plural form of "child"?',
                 options: ['Childs', 'Childes', 'Children', 'Childrens'],
                 answer: 'Children'
             },
             {
-                id: 25,
+                id: 35,
                 category: 'English',
                 question: 'Which is an example of an adjective?',
                 options: ['Quickly', 'Run', 'Happy', 'On'],
                 answer: 'Happy'
+            },
+            {
+                id: 36,
+                category: 'English',
+                question: 'Which word is a verb?',
+                options: ['Run', 'Beautiful', 'Quickly', 'Very'],
+                answer: 'Run'
+            },
+            {
+                id: 37,
+                category: 'English',
+                question: 'What is the antonym of "hot"?',
+                options: ['Warm', 'Cold', 'Cool', 'Mild'],
+                answer: 'Cold'
+            },
+            {
+                id: 38,
+                category: 'English',
+                question: 'Which of these is a pronoun?',
+                options: ['He', 'House', 'Blue', 'Run'],
+                answer: 'He'
+            },
+            {
+                id: 39,
+                category: 'English',
+                question: 'What is the comparative form of "big"?',
+                options: ['Bigger', 'Biggest', 'Big', 'More big'],
+                answer: 'Bigger'
+            },
+            {
+                id: 40,
+                category: 'English',
+                question: 'Which word is an example of a conjunction?',
+                options: ['And', 'But', 'Or', 'All of the above'],
+                answer: 'All of the above'
             }
         ]
     }
+
     const initialQuestionsFiltered = initialQuestions[selectedCategory] || [];
 
     const shuffledArray = (array) => {
@@ -293,9 +380,9 @@ const useQuizGame = () => {
         if (finalScore === maxScore) {
             setFeedback("Congratulations! You have a perfect score!");
             setShowConfetti(true);
-        } else if (finalScore >= Math.ceil(finalScore * 0.7)) {
+        } else if (finalScore >= 7 && finalScore <= 9) {
             setFeedback("Great job! You did it!");
-        } else if (finalScore >= Math.ceil(maxScore * 0.4)) {
+        } else if (finalScore >= 5 && finalScore <= 6) {
             setFeedback("Good effort! You tried your best!");
         } else if (finalScore >= 1) {
             setFeedback("Better luck next time.");
