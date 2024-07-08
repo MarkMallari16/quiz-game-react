@@ -14,8 +14,8 @@ const PlayComponent = () => {
                     <div className='flex justify-center items-center gap-4 mb-4'>
                         <div>
                             <div className='flex items-center gap-5'>
-                                <img src={QuizLogo} className='w-24 select-none hidden lg:block' />
-                                <h1 className=' text-5xl lg:text-7xl font-black text-center'>
+                                <img src={QuizLogo} className='w-28 select-none hidden lg:block' />
+                                <h1 className=' text-5xl lg:text-8xl font-black text-center select-none'>
                                     <span className='block lg:hidden'>Quiz</span> Game
                                 </h1>
                             </div>
@@ -25,12 +25,7 @@ const PlayComponent = () => {
                     <div className='text-center'>
                         <button className='btn btn-primary w-full' onClick={handleIsPlaying}>Play</button>
                     </div>
-                    <div className='flex justify-center mt-5'>
-                        <a href="https://github.com/MarkMallari16/quiz-game-react" target='_blank'>
-                            <FaGithub className='text-2xl' />
-                        </a>
-                    </div>
-                    <p className='text-center font-normal mt-1'>Copyright &copy; Mark Mallari 2024</p>
+                 
                 </div>
             </div>
         </ResponsiveLayout>

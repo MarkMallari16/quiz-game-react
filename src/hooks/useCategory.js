@@ -11,12 +11,13 @@ const useCategory = () => {
     const location = useLocation();
     const { name } = location.state || {};
 
-    console.log(name);
+
     const handleCategorySelect = (selectedCategory) => {
         setSelectedCategory(selectedCategory);
-        navigate(`/quiz-game?category=${encodeURIComponent(selectedCategory)}`);
+        navigate(`/quiz-game?category=${encodeURIComponent(selectedCategory)}`, { state: { name: name } });
 
-    }
+    }   
+    console.log(name);
     return { categories, handleCategorySelect };
 }
 

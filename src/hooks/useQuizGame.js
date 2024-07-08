@@ -8,6 +8,8 @@ const useQuizGame = () => {
     const { search } = useLocation();
     const params = new URLSearchParams(search);
     const selectedCategory = params.get('category');
+    const location = useLocation();
+    const { name } = location.state || {};
 
     const initialQuestions = {
         Programming: [
@@ -286,23 +288,23 @@ const useQuizGame = () => {
     }
 
     const checkScore = (finalScore) => {
+        const maxScore = initialQuestions[selectedCategory].length;
 
-        if (finalScore === initialQuestions[selectedCategory].length) {
+        if (finalScore === maxScore) {
             setFeedback("Congratulations! You have a perfect score!");
             setShowConfetti(true);
-        } else if (finalScore >= 7 && finalScore <= 9) {
+        } else if (finalScore >= Math.ceil(finalScore * 0.7)) {
             setFeedback("Great job! You did it!");
-        } else if (finalScore >= 4 && finalScore <= 6) {
+        } else if (finalScore >= Math.ceil(maxScore * 0.4)) {
             setFeedback("Good effort! You tried your best!");
-        } else if (finalScore >= 1 && finalScore <= 3) {
+        } else if (finalScore >= 1) {
             setFeedback("Better luck next time.");
         } else {
             setFeedback("Keep practicing!");
         }
     }
 
-
-
+    //reset the state
     const resetState = () => {
         setQuestions(shuffledArray([...initialQuestionsFiltered]));
         setCurrentQuestionIndex(0);
@@ -325,6 +327,7 @@ const useQuizGame = () => {
         originalHandleExit();
     }
     return {
+        name,
         questions,
         score,
         currentQuestionIndex,

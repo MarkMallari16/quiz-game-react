@@ -3,9 +3,12 @@ import Confetti from 'react-confetti';
 import useQuizGame from '../hooks/useQuizGame';
 import useConfetti from '../hooks/useConfetti';
 import useInfo from '../hooks/useInfo';
+import { useLocation } from 'react-router-dom';
 
 const QuizGame = () => {
-    const { questions,
+    const {
+        name,
+        questions,
         score,
         currentQuestionIndex,
         isShowScore,
@@ -17,15 +20,13 @@ const QuizGame = () => {
         timer } = useQuizGame();
 
     const { dimensions } = useConfetti();
-    const { nameValue } = useInfo();
-    
-    console.log(nameValue);
+
     return (
         <div className='h-screen flex items-center justify-center bg-blue-500 shadow-lg'>
             {isShowScore ? (
                 <div className='bg-white p-10 lg:p-24 rounded-lg'>
                     <div className='text-2xl font-black uppercase'>
-                        {nameValue}, your score is:
+                        {name}, your score is:
                     </div>
                     <div className='font-black text-center text-6xl  my-6'>
                         {score} / {questions.length}
@@ -41,7 +42,7 @@ const QuizGame = () => {
                     <div className='text-6xl font-bold text-center mb-5'> {timer}</div>
                     <div className='flex justify-between gap-2 mb-4'>
 
-                        <div className='font-bold'>Name: {nameValue}</div>
+                        <div className='font-bold'>Name: {name}</div>
 
                         <div>{currentQuestionIndex + 1} / {questions.length}</div>
                     </div>
@@ -70,7 +71,7 @@ const QuizGame = () => {
                     <Confetti
                         width={dimensions.width}
                         height={dimensions.height}
-                        gravity={0.10}
+                        gravity={0.5}
                         numberOfPieces={500}
                     />
                 </div>

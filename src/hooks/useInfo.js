@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const useInfo = () => {
     const [nameValue, setNameValue] = useState("");
     const [error, setError] = useState("");
-    
+
     const navigate = useNavigate();
 
     const handleNameValue = (e) => {

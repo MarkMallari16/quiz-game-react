@@ -8,7 +8,7 @@ const Category = () => {
 
     return (
         <ResponsiveLayout>
-            <div className=' bg-white rounded-lg p-20 w-96'>
+            <div className=' bg-white rounded-lg w-96 lg:w-1/3 p-10'>
                 <p className='font-medium mb-2'>Select Category</p>
                 <div className='flex flex-col gap-3 w-full'>
                     {categories.map((category) => (
