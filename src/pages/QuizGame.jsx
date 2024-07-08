@@ -7,7 +7,9 @@ import useConfetti from '../hooks/useConfetti';
 const QuizGame = () => {
     const {
         name,
+        selectedCategory,
         questions,
+        shuffledOptions,
         score,
         currentQuestionIndex,
         isShowScore,
@@ -32,7 +34,7 @@ const QuizGame = () => {
                     </div>
                     <div className='text-center font-medium'>{feedback}</div>
                     <div className='mt-4'>
-                        <button className='btn btn-primary w-full rounded-lg mt-3 font-bold' onClick={handleTryAgain}>Take new quiz</button>
+                        <button className='btn btn-primary w-full rounded-lg mt-3 font-bold' onClick={handleTryAgain}>Retry Quiz</button>
                         <button className='btn btn-error py-2 font-bold  w-full rounded-lg mt-3' onClick={handleExit}>Exit</button>
                     </div>
                 </div>
@@ -41,7 +43,7 @@ const QuizGame = () => {
                     <div className='text-6xl font-bold text-center mb-5'> {timer}</div>
                     <div className='flex justify-between gap-2 mb-4'>
 
-                        <div className='font-bold'>Name: {name}</div>
+                        <div className='font-bold'>Category: {selectedCategory}</div>
 
                         <div>{currentQuestionIndex + 1} / {questions.length}</div>
                     </div>
@@ -50,7 +52,7 @@ const QuizGame = () => {
                     </div>
 
                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-2'>
-                        {questions[currentQuestionIndex] && questions[currentQuestionIndex].options.map((option, index) => (
+                        {questions[currentQuestionIndex] && shuffledOptions.map((option, index) => (
                             <button
                                 key={index}
                                 className={`btn btn-outline select-none w-96`}
@@ -69,7 +71,7 @@ const QuizGame = () => {
                     <Confetti
                         width={dimensions.width}
                         height={dimensions.height}
-                        gravity={0.8}
+                        gravity={0.12}
                         numberOfPieces={500}
                     />
                 </div>

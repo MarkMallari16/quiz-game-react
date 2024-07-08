@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 
 const useQuizGame = () => {
     const { handleExit: originalHandleExit } = usePlay();
+
     const { search } = useLocation();
     const params = new URLSearchParams(search);
     const selectedCategory = params.get('category');
@@ -321,6 +322,7 @@ const useQuizGame = () => {
     const [isTimerRunning, setIsTimerRunning] = useState(true);
     const [questions, setQuestions] = useState(() => shuffledArray([...initialQuestionsFiltered]));
     const [selectedOption, setSelectedOption] = useState("");
+    const [shuffledOptions, setShuffledOptions] = useState(questions[currentQuestionIndex].options);
 
     const { showConfetti, setShowConfetti } = useConfetti();
 
@@ -345,6 +347,12 @@ const useQuizGame = () => {
         return () => clearInterval(timerInterval);
 
     }, [isTimerRunning, timer])
+
+    useEffect(() => {
+        if (currentQuestionIndex) {
+            setShuffledOptions(shuffledArray([...questions[currentQuestionIndex].options]));
+        }
+    }, [questions, currentQuestionIndex]);
 
     const handleNextQuestion = () => {
         const nextQuestionIndex = currentQuestionIndex + 1;
@@ -415,7 +423,9 @@ const useQuizGame = () => {
     }
     return {
         name,
+        selectedCategory,
         questions,
+        shuffledOptions,
         score,
         currentQuestionIndex,
         isShowScore,
