@@ -47,7 +47,7 @@ const QuizGame = () => {
 
                         <div>{currentQuestionIndex + 1} / {questions.length}</div>
                     </div>
-                    <div className='bg-slate-200 rounded-lg p-5 mb-4 select-none'>
+                    <div className='bg-slate-200 rounded-lg p-5 mb-4 select-none  w-full lg:w-auto'>
                         {questions[currentQuestionIndex] && questions[currentQuestionIndex].question}
                     </div>
 

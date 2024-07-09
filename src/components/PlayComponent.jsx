@@ -1,7 +1,6 @@
 import React from 'react'
 import usePlay from '../hooks/usePlay';
 import ResponsiveLayout from './ResponsiveLayout';
-import { FaGithub } from "react-icons/fa";
 import QuizLogo from '../assets/quiz.png'
 
 const PlayComponent = () => {
@@ -14,9 +13,8 @@ const PlayComponent = () => {
                     <div className='flex justify-center items-center gap-4 mb-4'>
                         <div>
                             <div className='flex items-center gap-5'>
-                                <img src={QuizLogo} className='w-28 select-none hidden lg:block' />
-                                <h1 className=' text-5xl lg:text-8xl font-black text-center select-none'>
-                                    <span className='block lg:hidden'>Quiz</span> Game
+                                <h1 className=' text-5xl lg:text-7xl font-black text-center select-none'>
+                                   Quiz Game
                                 </h1>
                             </div>
 
